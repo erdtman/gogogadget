@@ -13,38 +13,46 @@
     </div>
     <div class="columns">
       <div class="column col-4">
-        <textarea v-model="message" ></textarea>
+        <textarea v-model="hex"></textarea>
       </div>
       <div class="column col-4">
-        <textarea v-model="message" ></textarea>
+        <textarea v-model="base62" ></textarea>
       </div>
       <div class="column col-4">
-        <textarea v-model="message"  ></textarea>
+        <textarea v-model="base64"  ></textarea>
     </div>
   </div>
 </div>  
 </template>
 
 <script>
-import axios from "axios";
+import baseX from "base-x";
+const base62 = baseX('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
 export default {
-  components: {
-    Chart
-  },
-  data () {
+  data() {
     return {
-      message: "<empty>",
+      hex: "",
+      base62: "",
+      base64: ""
     }
   },
-  async mounted() {
-    
-  },
-  methods: {
-    async update() {
-       
+  watch: {
+    hex () {
+      const buffer = Buffer.from(this.hex, 'hex');
+      this.base62 = base62.encode(buffer);
+      this.base64 = buffer.toString('base64');
+    },
+    base62 () {
+      const buffer = base62.decode(this.base62);
+      this.hex = buffer.toString('hex');
+      this.base64 = buffer.toString('base64');
+    },
+    base64 () {
+      const buffer = Buffer.from(this.base64, 'base64');
+      this.hex = buffer.toString('hex');
+      this.base62 = base62.encode(buffer);
     }
-  } 
-
+  }
 };
 </script>
