@@ -3,11 +3,8 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('view'));
 
 const host = process.env.HOST || '127.0.0.1';
