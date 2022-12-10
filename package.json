@@ -21,7 +21,7 @@
   "homepage": "https://github.com/erdtman/solar-power-skir#readme",
   "dependencies": {
     "base-x": "^3.0.7",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.2"
